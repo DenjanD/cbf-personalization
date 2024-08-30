@@ -1,0 +1,24 @@
+{% extends 'appta/base.html' %}
+
+{% block title %}Personalized Recommendations - YouTube Video Personalizer{% endblock %}
+
+{% block content %}
+    <h1>Personalized Learning Preferences</h1>
+    <form action="{% url 'preferences_form' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="topic">Topic:</label>
+            <input type="text" name="topic" id="">
+        </div>
+        <div class="form-group">
+            <label for="difficulty">Difficulty Level:</label><br>
+            <input type="radio" id="beginner" name="difficulty" value="beginner">
+            <label for="beginner">Beginner</label><br>
+            <input type="radio" id="intermediate" name="difficulty" value="intermediate">
+            <label for="intermediate">Intermediate</label><br>
+            <input type="radio" id="advanced" name="difficulty" value="advanced">
+            <label for="advanced">Advanced</label>
+        </div>
+        <input type="submit" value="Get Recommendations">
+    </form>
+{% endblock %}

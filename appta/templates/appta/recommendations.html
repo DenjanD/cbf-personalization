@@ -1,0 +1,99 @@
+{% extends 'appta/base.html' %}
+{% load custom_filters %}
+
+{% block title %}Personalized Recommendations - YouTube Video Personalizer{% endblock %}
+
+{% block content %}
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .video {
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+    }
+    .video:last-child {
+        border-bottom: none;
+    }
+    .video-thumbnail {
+        width: 120px;
+        height: auto;
+        margin-right: 20px;
+    }
+    .video-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .video-description {
+        margin: 10px 0;
+    }
+    .video-duration {
+        color: #242424;
+    }
+    .video-distance {
+        color: #676767;
+    }
+</style>
+    <h1>Recommended Videos</h1>
+    <div class="row">
+        <div class="col-md-6">
+        {% if recommendations_with_distances %}
+            {% for video, distance in recommendations_with_distances %}
+                <a href="{{ video.url }}">
+                    <div class="video">
+                        <img src="{{ video.thumbnail }}" alt="Thumbnail" class="video-thumbnail">
+                        <div>
+                            <div class="video-title">{{ video.title }}</div>
+                            <div class="video-description">{{ video.description }}</div>
+                            <div class="video-duration">Duration: <b> {{ video.duration|seconds_to_hhmmss }}</b></div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            {% else %}
+                <p>No recommendations found.</p>
+        {% endif %}
+        </div>
+        <div class="col-md-6">
+        {% if recommendations_with_distances2 %}
+            {% for video, distance in recommendations_with_distances2 %}
+                <a href="{{ video.url }}">
+                    <div class="video">
+                        <img src="{{ video.thumbnail }}" alt="Thumbnail" class="video-thumbnail">
+                        <div>
+                            <div class="video-title">{{ video.title }}</div>
+                            <div class="video-description">{{ video.description }}</div>
+                            <div class="video-duration">Duration: <b> {{ video.duration|seconds_to_hhmmss }}</b></div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            {% else %}
+                <p>No recommendations found.</p>
+        {% endif %}
+        
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% if average_normalized_distance_cosine %}
+                    <p>Average Normalized Cosine Distances: <b>{{average_normalized_distance_cosine}}</b></p>
+                {% endif %}
+                {% if average_normalized_distance_euclidean %}
+                    <p>Average Normalized Euclidean Distances: <b>{{average_normalized_distance_euclidean}}</b></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

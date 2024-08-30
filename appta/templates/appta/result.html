@@ -1,0 +1,21 @@
+{% extends 'appta/base.html' %}
+
+{% block title %}Personalized Recommendations - YouTube Video Personalizer{% endblock %}
+
+{% block content %}
+<div class="my-4">
+    <h2>Your Personalized Recommendations</h2>
+    <p>Based on your preferences, here are some YouTube videos you might like:</p>
+    <ul class="list-group">
+        <!-- Example of a mock data -->
+        <li class="list-group-item">
+            <h5>Video Title 1</h5>
+            <p>Topic: {{ preferences.topic }}</p>
+            <p>Difficulty: {{ preferences.difficulty }}</p>
+            <p>Duration: {{ preferences.duration }} minutes</p>
+            <a href="#" class="btn btn-primary">Watch Now</a>
+        </li>
+        <!-- Add more mock video items here -->
+    </ul>
+</div>
+{% endblock %}
